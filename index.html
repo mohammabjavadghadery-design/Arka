@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="آرکا - هوش مصنوعی پیشرفته برای مدیریت سیستم ویندوز با دستورات CMD، PowerShell و Run">
+<meta name="keywords" content="آرکا, هوش مصنوعی, CMD, PowerShell, Run, دستورات ویندوز, مدیریت سیستم">
+<meta name="author" content="محمد جواد قادری">
+<meta property="og:title" content="آرکا - Neural Command Hub">
+<meta property="og:description" content="انقلابی در مدیریت سیستم با هوش مصنوعی">
+<meta property="og:type" content="website">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="assets/media/images/logo-neon.png" type="image/png">
+<link rel="apple-touch-icon" href="assets/media/images/logo-neon.png">
+<meta name="theme-color" content="#0a0a12">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<!-- CDN Libraries -->
+<link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<!-- Local CSS -->
+<link rel="stylesheet" href="assets/css/main.css">
+<link rel="stylesheet" href="assets/css/animations.css">
+<link rel="stylesheet" href="assets/css/responsive.css">
+<link rel="stylesheet" href="assets/css/themes.css">
+<title>آرکا - Neural Command Hub</title>
+<style>
+/* Mobile warning styles */
+.mobile-warning {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(10, 0, 30, 0.95);
+backdrop-filter: blur(10px);
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+z-index: 10000;
+text-align: center;
+padding: 20px;
+}
+.mobile-warning h2 {
+font-size: 2.5rem;
+margin-bottom: 20px;
+color: var(--danger-neon);
+text-shadow: 0 0 15px rgba(255, 26, 26, 0.7);
+}
+.mobile-warning p {
+font-size: 1.2rem;
+margin-bottom: 30px;
+line-height: 1.6;
+color: var(--secondary-neon);
+}
+.mobile-warning .device-icons {
+display: flex;
+justify-content: center;
+gap: 30px;
+margin: 30px 0;
+}
+.mobile-warning .device-icon {
+font-size: 4rem;
+color: var(--primary-neon);
+}
+.mobile-warning .instructions {
+background: rgba(30, 20, 60, 0.6);
+border-radius: 15px;
+padding: 20px;
+margin: 20px 0;
+border: 1px solid var(--glass-border);
+}
+.mobile-warning .instructions ol {
+text-align: left;
+color: var(--secondary-neon);
+line-height: 1.8;
+}
+.mobile-warning button {
+background: linear-gradient(45deg, var(--primary-neon), var(--secondary-neon));
+color: black;
+border: none;
+padding: 12px 30px;
+border-radius: 15px;
+font-size: 1.1rem;
+font-weight: bold;
+cursor: pointer;
+transition: all 0.3s ease;
+margin-top: 20px;
+}
+.mobile-warning button:hover {
+transform: scale(1.05);
+box-shadow: 0 0 20px rgba(0, 255, 140, 0.5);
+}
+</style>
+</head>
+<body>
+<!-- Mobile Warning Overlay -->
+<div class="mobile-warning" id="mobile-warning" style="display: none;">
+<div class="warning-container">
+<h2><i class="fas fa-mobile-alt"></i> دسترسی محدود</h2>
+<p>این سایت به صورت اختصاصی برای دسکتاپ و لپ‌تاپ طراحی شده است</p>
+<div class="device-icons">
+<div class="device-icon">
+<i class="fas fa-desktop"></i>
+<p>دسکتاپ</p>
+</div>
+<div class="device-icon">
+<i class="fas fa-laptop"></i>
+<p>لپ‌تاپ</p>
+</div>
+</div>
+<div class="instructions">
+<h3><i class="fas fa-info-circle"></i> روش استفاده:</h3>
+<ol>
+<li>لطفاً این سایت را با یک کامپیوتر یا لپ‌تاپ باز کنید</li>
+<li>اگر از گوشی استفاده می‌کنید، مرورگر را در حالت دسکتاپ باز کنید</li>
+<li>برای فعال‌سازی حالت دسکتاپ در کروم: منو (⋮) → حالت دسکتاپ</li>
+<li>برای فعال‌سازی حالت دسکتاپ در سایر مرورگرها: منو → درخواست نسخه دسکتاپ</li>
+</ol>
+</div>
+<button id="proceed-anyway">
+<i class="fas fa-exclamation-triangle"></i> ادامه با گوشی (تجربه کاربری محدود)
+</button>
+</div>
+</div>
+
+<!-- شبکه پس‌زمینه OLED -->
+<canvas id="background-grid"></canvas>
+<!-- ذرات کوانتومی -->
+<div id="quantum-particles"></div>
+<!-- نوار بالایی -->
+<header class="navbar glass-navbar" data-aos="fade-down">
+<div class="container-fluid">
+<div class="navbar-brand">
+<i class="fas fa-brain quantum-icon"></i>
+<span class="brand-name">آرکا</span>
+<span class="brand-subtitle">Neural Command Hub</span>
+</div>
+<div class="navbar-nav">
+<button class="mode-toggle" id="mode-toggle">
+<i class="fas fa-moon"></i> <span>حالت شب</span>
+</button>
+<button class="mode-toggle expert-mode-toggle" id="expert-toggle">
+<i class="fas fa-user"></i> <span>حالت مبتدی</span>
+</button>
+<button class="tutorial-btn" id="tutorial-btn">
+<i class="fas fa-graduation-cap"></i> راهنما
+</button>
+<a href="#about" class="about-btn" id="about-btn">
+<i class="fas fa-info-circle"></i> درباره
+</a>
+<a href="#usage" class="about-btn" id="usage-btn">
+<i class="fas fa-book"></i> راهنما استفاده
+</a>
+</div>
+</div>
+</header>
+<!-- نوار مسیر (Breadcrumbs) -->
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+<ol class="breadcrumb">
+<li class="breadcrumb-item"><a href="#home"><i class="fas fa-home"></i> خانه</a></li>
+<li class="breadcrumb-item active" aria-current="page" id="current-page">داشبورد اصلی</li>
+</ol>
+</nav>
+<!-- محتوای اصلی -->
+<main class="container-fluid mt-4">
+<!-- صفحه درباره -->
+<div id="about-page" class="page-content" style="display: none;">
+<div class="glass-card about-section">
+<div class="section-header">
+<h2><i class="fas fa-user-circle"></i> درباره سازنده</h2>
+<p class="section-description">طراح و توسعه‌دهنده این پروژه</p>
+</div>
+<div class="creator-profile">
+<div class="avatar">
+<i class="fas fa-user-graduate avatar-icon"></i>
+</div>
+<div class="creator-info">
+<h3 class="creator-name">محمد جواد قادری</h3>
+<p class="creator-title">طراح و توسعه‌دهنده ارشد</p>
+<p class="creator-description">
+من محمد جواد قادری هستم، طراح و توسعه‌دهنده این پروژه. این سایت با هدف ایجاد یک ابزار قدرتمند و کاربرپسند برای مدیریت سیستم‌های ویندوزی طراحی شده است. امیدوارم از استفاده از این ابزار لذت ببرید و بتوانید سیستم خود را به صورت حرفه‌ای مدیریت کنید.
+</p>
+<div class="creator-contact">
+<h4>راه‌های ارتباطی:</h4>
+<ul class="contact-list">
+<li><i class="fas fa-envelope"></i> mohammad.javad.ghaderi@example.com</li>
+<li><i class="fas fa-globe"></i> www.mohammad-javad-ghaderi.ir</li>
+<li><i class="fab fa-github"></i> github.com/mohammad-javad-ghaderi</li>
+</ul>
+</div>
+<div class="creator-social">
+<a href="#" class="social-btn"><i class="fab fa-github"></i> GitHub</a>
+<a href="#" class="social-btn"><i class="fab fa-linkedin"></i> LinkedIn</a>
+<a href="#" class="social-btn"><i class="fab fa-twitter"></i> Twitter</a>
+</div>
+</div>
+</div>
+<div class="project-info">
+<div class="section-header">
+<h3><i class="fas fa-project-diagram"></i> درباره پروژه</h3>
+</div>
+<ul class="project-details">
+<li><strong>نام پروژه:</strong> آرکا کامند هاب</li>
+<li><strong>نسخه:</strong> 1.0.0</li>
+<li><strong>تاریخ ایجاد:</strong> 27 دسامبر 2025</li>
+<li><strong>زبان برنامه‌نویسی:</strong> HTML, CSS, JavaScript</li>
+<li><strong>هدف:</strong> مدیریت حرفه‌ای سیستم‌های ویندوزی با هوش مصنوعی</li>
+<li><strong>لایسنس:</strong> شخصی و غیرتجاری</li>
+</ul>
+</div>
+<div class="back-to-home">
+<button class="btn btn-primary back-btn" data-target="#home">
+<i class="fas fa-arrow-left"></i> بازگشت به خانه
+</button>
+</div>
+</div>
+</div>
+
+<!-- صفحه راهنما استفاده -->
+<div id="usage-page" class="page-content" style="display: none;">
+<div class="glass-card usage-section">
+<div class="section-header">
+<h2><i class="fas fa-book-open"></i> راهنما استفاده از سایت و هوش مصنوعی</h2>
+<p class="section-description">آموزش کامل نحوه استفاده از تمام قابلیت‌های سایت</p>
+</div>
+<div class="usage-steps">
+<h3><i class="fas fa-lightbulb"></i> مقدمه</h3>
+<p class="usage-text">
+آرکا یک هوش مصنوعی پیشرفته برای مدیریت سیستم‌های ویندوزی است که به شما کمک می‌کند تا دستورات CMD، PowerShell و Run را به صورت هوشمندانه پیدا کرده و اجرا کنید. این راهنما به شما کمک می‌کند تا بهترین استفاده را از این ابزار داشته باشید.
+</p>
+
+<div class="step-card">
+<h3><i class="fas fa-step-forward"></i> مرحله 1: استفاده از هوش مصنوعی</h3>
+<p class="usage-text">
+در بخش هوش مصنوعی، کار خود را به فارسی ساده بنویسید. هوش مصنوعی آرکا درخواست شما را تحلیل کرده و بهترین دستورات را پیشنهاد می‌دهد.
+</p>
+<div class="usage-example">
+<h4>مثال‌های کاربردی:</h4>
+<ul class="example-list">
+<li><code class="example-code">"فایل‌های حجیم رو پاک کنم"</code></li>
+<li><code class="example-code">"شبکه رو تست کنم"</code></li>
+<li><code class="example-code">"حافظه سیستم رو خالی کنم"</code></li>
+<li><code class="example-code">"فرآیندهای پر مصرف رو ببینم"</code></li>
+<li><code class="example-code">"سیستم رو بهینه کنم"</code></li>
+</ul>
+</div>
+<div class="tips-section">
+<h4><i class="fas fa-bolt"></i> نکات مهم:</h4>
+<ul class="tips-list">
+<li>هرچه سؤال شما دقیق‌تر باشد، پاسخ بهتری دریافت می‌کنید</li>
+<li>از کلمات ساده و روزمره استفاده کنید</li>
+<li>اگر پاسخ مورد نظرتان نبود، سؤال خود را با جزئیات بیشتر مطرح کنید</li>
+<li>هوش مصنوعی به صورت خودکار وضعیت سیستم شما را تحلیل می‌کند</li>
+</ul>
+</div>
+</div>
+
+<div class="step-card">
+<h3><i class="fas fa-step-forward"></i> مرحله 2: انتخاب محیط اجرا</h3>
+<p class="usage-text">
+سیستم آرکا سه محیط اصلی برای اجرای دستورات دارد:
+</p>
+<div class="environment-info">
+<div class="env-card">
+<i class="fas fa-terminal env-icon cmd"></i>
+<h4>CMD</h4>
+<p>برای دستورات ساده و سریع خط فرمان ویندوز</p>
+<ul class="env-features">
+<li>مناسب برای کاربران مبتدی</li>
+<li>سرعت اجرا بالا</li>
+<li>دستورات ساده و کاربردی</li>
+</ul>
+</div>
+<div class="env-card">
+<i class="fas fa-code env-icon powershell"></i>
+<h4>PowerShell</h4>
+<p>برای اسکریپت‌های پیشرفته و عملیات پیچیده</p>
+<ul class="env-features">
+<li>قدرت پردازش بالا</li>
+<li>قابلیت اسکریپت‌نویسی</li>
+<li>دسترسی کامل به سیستم</li>
+</ul>
+</div>
+<div class="env-card">
+<i class="fas fa-rocket env-icon run"></i>
+<h4>Run</h4>
+<p>برای اجرای سریع برنامه‌ها و ابزارهای سیستمی</p>
+<ul class="env-features">
+<li>اجرای مستقیم برنامه‌ها</li>
+<li>دسترسی به ابزارهای ویندوز</li>
+<li>کاربردی برای عملیات سریع</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="step-card">
+<h3><i class="fas fa-step-forward"></i> مرحله 3: امنیت و اعتبارسنجی</h3>
+<p class="usage-text">
+آرکا امنیت شما را در اولویت قرار می‌دهد. قبل از اجرای هر دستور، سیستم آن را اعتبارسنجی می‌کند:
+</p>
+<div class="security-levels">
+<div class="security-level low">
+<h4><i class="fas fa-circle text-success"></i> ریسک پایین (1-3)</h4>
+<p>دستورات ایمن که بدون نیاز به تأیید اجرا می‌شوند</p>
+</div>
+<div class="security-level medium">
+<h4><i class="fas fa-circle text-warning"></i> ریسک متوسط (4-6)</h4>
+<p>دستورات نیازمند تأیید با یک کلیک</p>
+</div>
+<div class="security-level high">
+<h4><i class="fas fa-circle text-danger"></i> ریسک بالا (7-10)</h4>
+<p>دستورات نیازمند تأیید دو مرحله‌ای و کپی پشتیبان</p>
+</div>
+</div>
+<div class="safety-tips">
+<h4><i class="fas fa-shield-alt"></i> نکات امنیتی:</h4>
+<ul class="tips-list">
+<li>هرگز دستورات ریسک بالا را بدون بررسی اجرا نکنید</li>
+<li>قبل از اجرای دستورات مهم، حتماً از داده‌های حساس بکاپ بگیرید</li>
+<li>در صورت شک، از هوش مصنوعی بپرسید که آیا دستور ایمن است یا خیر</li>
+<li>سیستم آرکا هیچ دستوری را به صورت خودکار اجرا نمی‌کند</li>
+</ul>
+</div>
+</div>
+
+<div class="step-card">
+<h3><i class="fas fa-step-forward"></i> مرحله 4: ترمینال کوانتومی</h3>
+<p class="usage-text">
+ترمینال کوانتومی آرکا تمام خروجی‌های دستورات را در زمان واقعی نمایش می‌دهد:
+</p>
+<div class="terminal-features">
+<div class="feature-item">
+<i class="fas fa-copy"></i>
+<span>کپی کردن کل لاگ با یک کلیک</span>
+</div>
+<div class="feature-item">
+<i class="fas fa-trash"></i>
+<span>پاک کردن لاگ ترمینال</span>
+</div>
+<div class="feature-item">
+<i class="fas fa-download"></i>
+<span>دانلود لاگ به صورت فایل متنی</span>
+</div>
+<div class="feature-item">
+<i class="fas fa-history"></i>
+<span>مشاهده تاریخچه دستورات اجرا شده</span>
+</div>
+</div>
+</div>
+
+<div class="step-card">
+<h3><i class="fas fa-step-forward"></i> مرحله 5: آمار و وضعیت سیستم</h3>
+<p class="usage-text">
+سیستم آرکا به صورت لحظه‌ای وضعیت سیستم شما را نمایش می‌دهد:
+</p>
+<div class="stats-info">
+<div class="stat-item">
+<i class="fas fa-fire"></i>
+<span>دمای CPU: وضعیت فعلی پردازنده</span>
+</div>
+<div class="stat-item">
+<i class="fas fa-memory"></i>
+<span>حافظه RAM: میزان استفاده از حافظه</span>
+</div>
+<div class="stat-item">
+<i class="fas fa-hdd"></i>
+<span>فضای دیسک: فضای آزاد موجود</span>
+</div>
+<div class="stat-item">
+<i class="fas fa-bolt"></i>
+<span>مصرف CPU: بار فعلی پردازنده</span>
+</div>
+</div>
+<div class="alert-system">
+<h4><i class="fas fa-bell"></i> سیستم هشداردهنده:</h4>
+<p>در صورت تشخیص مشکلات سیستم (دمای بالا، حافظه پر، فضای کم)، آرکا به صورت خودکار هشدار نمایش می‌دهد و راه‌حل‌های پیشنهادی ارائه می‌کند.</p>
+</div>
+</div>
+</div>
+<div class="back-to-home">
+<button class="btn btn-primary back-btn" data-target="#home">
+<i class="fas fa-arrow-left"></i> بازگشت به خانه
+</button>
+</div>
+</div>
+</div>
+
+<!-- بخش هوش مصنوعی (صفحه اصلی) -->
+<section class="ai-section glass-card" data-aos="fade-up">
+<div class="section-header">
+<h2><i class="fas fa-robot"></i> هوش مصنوعی آرکا</h2>
+<p class="section-description">کار خود را به فارسی توضیح دهید، من بهترین دستور را پیدا می‌کنم</p>
+</div>
+<div class="ai-input-container">
+<input type="text" class="ai-input" id="ai-input" placeholder="مثلاً: 'فایل‌های حجیم رو پاک کنم' یا 'شبکه رو تست کنم'...">
+<button class="ai-submit" id="ai-submit">
+<i class="fas fa-paper-plane"></i>
+</button>
+</div>
+<div class="ai-response" id="ai-response">
+<div class="typing-effect">
+<span>سلام! من آرکا هستم. کار خود را بنویسید تا بهترین دستور را برایتان پیدا کنم...</span>
+</div>
+</div>
+<div class="ai-suggestions">
+<div class="suggestion-chip" data-query="فایل‌های موقت رو پاک کنم">فایل‌های موقت رو پاک کنم</div>
+<div class="suggestion-chip" data-query="حافظه سیستم رو خالی کنم">حافظه سیستم رو خالی کنم</div>
+<div class="suggestion-chip" data-query="شبکه رو تست کنم">شبکه رو تست کنم</div>
+<div class="suggestion-chip" data-query="فرآیندهای پر مصرف رو ببینم">فرآیندهای پر مصرف رو ببینم</div>
+</div>
+</section>
+<!-- بخش انتخاب محیط -->
+<section class="environment-section glass-card" data-aos="fade-up" data-aos-delay="100">
+<div class="section-header">
+<h2><i class="fas fa-terminal"></i> انتخاب محیط اجرا</h2>
+<p class="section-description">محیط مناسب برای کارتان را انتخاب کنید</p>
+</div>
+<div class="shell-triad">
+<div class="shell-btn cmd-btn" data-env="CMD">
+<i class="fas fa-terminal"></i>
+<div class="shell-name">CMD</div>
+<div class="shell-desc">دستورات کامند لاین ویندوز</div>
+</div>
+<div class="shell-btn powershell-btn" data-env="PowerShell">
+<i class="fas fa-code"></i>
+<div class="shell-name">PowerShell</div>
+<div class="shell-desc">اسکریپت‌های پیشرفته ویندوز</div>
+</div>
+<div class="shell-btn run-btn" data-env="Run">
+<i class="fas fa-rocket"></i>
+<div class="shell-name">Run</div>
+<div class="shell-desc">اجرای سریع برنامه‌ها و ابزارها</div>
+</div>
+</div>
+</section>
+<!-- بخش دستورات -->
+<section class="commands-section glass-card" id="commands-section" style="display: none;" data-aos="fade-up" data-aos-delay="200">
+<div class="section-header">
+<h2><i class="fas fa-list-alt"></i> <span id="environment-title">دستورات CMD</span></h2>
+<p class="section-description">لیست کامل دستورات با توضیحات فارسی</p>
+</div>
+<div class="search-filter">
+<input type="text" class="form-control filter-input" id="command-filter" placeholder="جستجوی دستور...">
+<div class="filter-buttons">
+<button class="filter-btn active" data-filter="all">همه</button>
+<button class="filter-btn" data-filter="low">ریسک پایین</button>
+<button class="filter-btn" data-filter="medium">ریسک متوسط</button>
+<button class="filter-btn" data-filter="high">ریسک بالا</button>
+</div>
+</div>
+<div class="commands-grid" id="commands-grid">
+<!-- دستورات به صورت داینامیک اینجا قرار می‌گیرند -->
+<div class="skeleton-card"></div>
+<div class="skeleton-card"></div>
+<div class="skeleton-card"></div>
+</div>
+</section>
+<!-- ترمینال کوانتومی -->
+<section class="terminal-section glass-card" data-aos="fade-up" data-aos-delay="300">
+<div class="section-header">
+<h2><i class="fas fa-microchip"></i> ترمینال کوانتومی</h2>
+<p class="section-description">خروجی دستورات در زمان واقعی</p>
+</div>
+<div class="quantum-terminal" id="quantum-terminal">
+<div class="terminal-line info">🚀 آرکا آماده دریافت دستورات است...</div>
+<div class="terminal-line info">🌌 سیستم در حال آنالیز وضعیت فعلی...</div>
+<div class="terminal-line success">✅ سلام! من آرکا هستم. چطور می‌تونم کمکتون کنم؟</div>
+</div>
+<div class="terminal-controls">
+<button class="copy-btn" id="copy-terminal">
+<i class="fas fa-copy"></i> کپی لاگ
+</button>
+<button class="clear-btn" id="clear-terminal">
+<i class="fas fa-trash"></i> پاک کردن
+</button>
+<button class="download-btn" id="download-terminal">
+<i class="fas fa-download"></i> دانلود لاگ
+</button>
+</div>
+</section>
+<!-- بخش آمار و وضعیت -->
+<section class="stats-section glass-card" data-aos="fade-up" data-aos-delay="400">
+<div class="section-header">
+<h2><i class="fas fa-chart-line"></i> آمار و وضعیت سیستم</h2>
+<p class="section-description">اطلاعات لحظه‌ای سیستم شما</p>
+</div>
+<div class="stats-grid">
+<div class="stat-card">
+<i class="fas fa-fire stat-icon"></i>
+<h3>دمای CPU</h3>
+<div class="stat-value" id="cpu-temp">45°C</div>
+<div class="stat-trend positive">-2°C</div>
+</div>
+<div class="stat-card">
+<i class="fas fa-memory stat-icon"></i>
+<h3>حافظه RAM</h3>
+<div class="stat-value" id="ram-usage">65%</div>
+<div class="stat-trend negative">+5%</div>
+</div>
+<div class="stat-card">
+<i class="fas fa-hdd stat-icon"></i>
+<h3>فضای دیسک</h3>
+<div class="stat-value" id="disk-space">120GB</div>
+<div class="stat-trend neutral">ثابت</div>
+</div>
+<div class="stat-card">
+<i class="fas fa-bolt stat-icon"></i>
+<h3>مصرف CPU</h3>
+<div class="stat-value" id="cpu-usage">35%</div>
+<div class="stat-trend positive">-10%</div>
+</div>
+</div>
+</section>
+</main>
+<!-- پنل تمرکز -->
+<div class="focus-backdrop" id="focus-backdrop"></div>
+<div class="focus-panel" id="focus-panel">
+<button class="close-btn" id="close-focus">
+<i class="fas fa-times"></i>
+</button>
+<h2 class="command-title" id="focus-title">
+<i class="fas fa-info-circle"></i>
+<span>جزئیات کامل دستور</span>
+</h2>
+<div class="command-code" id="focus-command"></div>
+<div class="command-details">
+<h3><i class="fas fa-book"></i> توضیحات کامل</h3>
+<div class="command-description" id="focus-description"></div>
+</div>
+<div class="security-section">
+<h3><i class="fas fa-shield-alt"></i> اطلاعات امنیتی</h3>
+<div class="risk-indicator" id="focus-risk"></div>
+<ul id="focus-warnings"></ul>
+</div>
+<div class="undo-section">
+<h3><i class="fas fa-redo"></i> دستور معکوس (Undo)</h3>
+<div class="command-code" id="focus-undo"></div>
+<p class="undo-description">در صورت اجرای این دستور، می‌توانید با دستور بالا به حالت اولیه برگردید.</p>
+</div>
+<div class="command-actions">
+<button class="copy-btn" id="focus-copy">
+<i class="fas fa-copy"></i> کپی دستور
+</button>
+<button class="execute-btn" id="focus-execute">
+<i class="fas fa-play"></i> اجرای دستور
+</button>
+</div>
+</div>
+<!-- مدال تأیید -->
+<div class="confirmation-modal" id="confirmation-modal">
+<div class="modal-content">
+<div class="modal-header">
+<h3 class="modal-title">🚨 تأیید اجرای دستور خطرناک</h3>
+<button class="close-modal" id="close-confirmation">
+<i class="fas fa-times"></i>
+</button>
+</div>
+<div class="modal-body">
+<div class="warning-section">
+<i class="fas fa-exclamation-triangle warning-icon"></i>
+<p class="warning-text" id="confirmation-warning">این دستور دارای ریسک بالا است و ممکن است باعث آسیب دائمی به سیستم شود.</p>
+</div>
+<div class="command-display">
+<h4>دستور انتخاب شده:</h4>
+<div class="command-code" id="confirmation-command"></div>
+</div>
+<div class="safety-steps">
+<h4>مراحل ایمنی:</h4>
+<ol id="safety-steps">
+<li>اطمینان از بکاپ گرفتن از داده‌های مهم</li>
+<li>اجرای دستور در محیط تست</li>
+<li>بررسی دقیق هشدارهای امنیتی</li>
+</ol>
+</div>
+<div class="hold-timer">
+<span class="hold-text">برای تأیید، دکمه را 3 ثانیه نگه دارید:</span>
+<div class="hold-progress" id="hold-progress"></div>
+</div>
+</div>
+<div class="modal-footer">
+<button class="cancel-btn" id="cancel-execute">
+<i class="fas fa-times"></i> انصراف
+</button>
+<button class="confirm-btn" id="confirm-execute">
+<i class="fas fa-check"></i> تأیید اجرای ایمن
+</button>
+</div>
+</div>
+</div>
+<!-- نوار وضعیت -->
+<footer class="status-bar">
+<div class="status-item">
+<i class="fas fa-circle status-dot connected"></i>
+<span>اتصال: آنلاین</span>
+</div>
+<div class="status-item">
+<i class="fas fa-brain"></i>
+<span>AI: فعال</span>
+</div>
+<div class="status-item">
+<i class="fas fa-shield-alt"></i>
+<span>امنیت: کوانتومی</span>
+</div>
+<div class="status-item">
+<i class="fas fa-history"></i>
+<span>تاریخچه: <span id="command-count">0</span> دستور</span>
+</div>
+<div class="status-item">
+<span class="version">v1.0.0</span>
+</div>
+<div class="status-item creator-info">
+<span>ساخته شده توسط: محمد جواد قادری</span>
+</div>
+</footer>
+<!-- CDN Libraries -->
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<!-- Local JavaScript -->
+<script src="assets/js/core/utils.js"></script>
+<script src="assets/js/core/router.js"></script>
+<script src="assets/js/commands/command-db.js"></script>
+<script src="assets/js/security/validator.js"></script>
+<script src="assets/js/security/sandbox.js"></script>
+<script src="assets/js/ai/nlp-processor.js"></script>
+<script src="assets/js/ai/suggest-engine.js"></script>
+<script src="assets/js/ai/ai-engine.js"></script>
+<script src="assets/js/ui/glass-effects.js"></script>
+<script src="assets/js/ui/parallax.js"></script>
+<script src="assets/js/ui/physics.js"></script>
+<script src="assets/js/ui/micro-interactions.js"></script>
+<script src="assets/js/commands/executor.js"></script>
+<script src="assets/js/commands/time-travel.js"></script>
+<script src="assets/js/core/main.js"></script>
+<script>
+// Mobile Detection
+document.addEventListener('DOMContentLoaded', function() {
+const mobileWarning = document.getElementById('mobile-warning');
+const proceedAnyway = document.getElementById('proceed-anyway');
+// Detect mobile device
+const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+const isTablet = /iPad|Tablet/i.test(navigator.userAgent);
+const isDesktop = !isMobile && !isTablet;
+// Show warning only on mobile devices (not tablets)
+if (isMobile && !isTablet) {
+mobileWarning.style.display = 'flex';
+document.body.style.overflow = 'hidden';
+}
+// Proceed anyway button
+if (proceedAnyway) {
+proceedAnyway.addEventListener('click', function() {
+mobileWarning.style.display = 'none';
+document.body.style.overflow = 'auto';
+alert('⚠️ توجه: تجربه کاربری روی موبایل محدود است. برای استفاده کامل، لطفاً از دسکتاپ یا لپ‌تاپ استفاده کنید.');
+});
+}
+// Desktop mode detection
+if (isDesktop) {
+console.log('✅ دسترسی از طریق دسکتاپ تشخیص داده شد');
+} else if (isTablet) {
+console.log('📱 دسترسی از طریق تبلت تشخیص داده شد - تجربه کاربری کامل');
+} else if (isMobile) {
+console.log('📱 دسترسی از طریق موبایل تشخیص داده شد - تجربه کاربری محدود');
+}
+// Initialize AOS
+AOS.init({
+duration: 800,
+easing: 'ease-in-out',
+once: true,
+mirror: false
+});
+// Page navigation handler
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+anchor.addEventListener('click', function(e) {
+e.preventDefault();
+const targetId = this.getAttribute('href');
+handlePageNavigation(targetId);
+});
+});
+function handlePageNavigation(targetId) {
+// Hide all pages
+document.querySelectorAll('.page-content').forEach(page => {
+page.style.display = 'none';
+});
+// Show target page
+if (targetId === '#about') {
+document.getElementById('about-page').style.display = 'block';
+document.getElementById('current-page').textContent = 'درباره سازنده';
+} else if (targetId === '#usage') {
+document.getElementById('usage-page').style.display = 'block';
+document.getElementById('current-page').textContent = 'راهنما استفاده';
+} else {
+// Show main content
+document.querySelectorAll('.page-content').forEach(page => {
+page.style.display = 'none';
+});
+document.getElementById('current-page').textContent = 'داشبورد اصلی';
+}
+// Track navigation
+if (typeof window.arcUtils !== 'undefined') {
+window.arcUtils.trackEvent('Navigation', 'Page Change', targetId);
+}
+}
+// Back button handlers
+document.querySelectorAll('.back-btn').forEach(btn => {
+btn.addEventListener('click', function() {
+const target = this.dataset.target;
+handlePageNavigation(target);
+});
+});
+});
+</script>
+</body>
+</html>
