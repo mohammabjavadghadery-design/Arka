@@ -1,0 +1,432 @@
+/* Dark Theme (Default) */
+:root {
+/* Primary Colors */
+--primary-neon: #00ff8c;
+--secondary-neon: #00ffff;
+--warning-neon: #fff01a;
+--danger-neon: #ff1a1a;
+--purple-neon: #ff00ff;
+--blue-neon: #1a8cff;
+--green-neon: #00ff00;
+--cyan-neon: #00ffff;
+--magenta-neon: #ff00ff;
+
+/* Background Colors */
+--bg-dark: #0a0a12;
+--bg-darker: #050010;
+--bg-cosmic: #1a0a2e;
+--bg-terminal: #050015;
+--bg-panel: #150030;
+--bg-card: #1a003a;
+--bg-hover: #200040;
+
+/* Glass Effects */
+--glass-bg: rgba(15, 10, 40, 0.7);
+--glass-border: rgba(0, 255, 140, 0.3);
+--glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+--blur-intensity: 10px;
+
+/* Text Colors */
+--text-primary: #ffffff;
+--text-secondary: #aaa;
+--text-tertiary: #777;
+--text-disabled: #555;
+
+/* Status Colors */
+--success: #00ff8c;
+--warning: #fff01a;
+--error: #ff1a1a;
+--info: #00ffff;
+
+/* Gradients */
+--gradient-primary: linear-gradient(45deg, var(--primary-neon), var(--secondary-neon));
+--gradient-danger: linear-gradient(45deg, var(--danger-neon), var(--purple-neon));
+--gradient-warning: linear-gradient(45deg, var(--warning-neon), var(--yellow-neon));
+--gradient-success: linear-gradient(45deg, var(--primary-neon), var(--green-neon));
+
+/* Borders */
+--border-radius: 15px;
+--border-width: 1px;
+--border-style: solid;
+
+/* Shadows */
+--shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.2);
+--shadow-md: 0 5px 15px rgba(0, 0, 0, 0.3);
+--shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.4);
+--shadow-xl: 0 15px 40px rgba(0, 0, 0, 0.5);
+
+/* Transitions */
+--transition-speed: 0.3s;
+--transition-easing: ease;
+--transition-all: all var(--transition-speed) var(--transition-easing);
+
+/* Fonts */
+--font-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+--font-code: 'Consolas', 'Courier New', monospace;
+--font-mono: 'Fira Code', 'Monaco', monospace;
+}
+
+/* Light Theme */
+body.light-theme {
+/* Primary Colors */
+--primary-neon: #008844;
+--secondary-neon: #0066cc;
+--warning-neon: #ffc107;
+--danger-neon: #dc3545;
+--purple-neon: #6f42c1;
+--blue-neon: #0d6efd;
+--green-neon: #198754;
+--cyan-neon: #0dcaf0;
+--magenta-neon: #d63384;
+
+/* Background Colors */
+--bg-dark: #f8f9fa;
+--bg-darker: #e9ecef;
+--bg-cosmic: #dee2e6;
+--bg-terminal: #f1f3f5;
+--bg-panel: #ffffff;
+--bg-card: #ffffff;
+--bg-hover: #f8f9fa;
+
+/* Glass Effects */
+--glass-bg: rgba(255, 255, 255, 0.85);
+--glass-border: rgba(0, 100, 0, 0.3);
+--glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+--blur-intensity: 5px;
+
+/* Text Colors */
+--text-primary: #333;
+--text-secondary: #666;
+--text-tertiary: #888;
+--text-disabled: #ccc;
+
+/* Status Colors */
+--success: #198754;
+--warning: #ffc107;
+--error: #dc3545;
+--info: #0dcaf0;
+
+/* Gradients */
+--gradient-primary: linear-gradient(45deg, var(--primary-neon), var(--secondary-neon));
+--gradient-danger: linear-gradient(45deg, var(--error), var(--purple-neon));
+--gradient-warning: linear-gradient(45deg, var(--warning), #ff8c00);
+--gradient-success: linear-gradient(45deg, var(--success), var(--green-neon));
+}
+
+/* Cyberpunk Theme */
+body.cyberpunk-theme {
+/* Primary Colors */
+--primary-neon: #ff00ff;
+--secondary-neon: #00ffff;
+--warning-neon: #ffff00;
+--danger-neon: #ff0000;
+--purple-neon: #ff00ff;
+--blue-neon: #00ffff;
+--green-neon: #00ff00;
+--cyan-neon: #00ffff;
+--magenta-neon: #ff00ff;
+
+/* Background Colors */
+--bg-dark: #000000;
+--bg-darker: #000000;
+--bg-cosmic: #1a001a;
+--bg-terminal: #000000;
+--bg-panel: #1a001a;
+--bg-card: #2a002a;
+--bg-hover: #3a003a;
+
+/* Glass Effects */
+--glass-bg: rgba(40, 0, 40, 0.8);
+--glass-border: rgba(255, 0, 255, 0.5);
+--glass-shadow: 0 0 20px rgba(255, 0, 255, 0.3);
+--blur-intensity: 8px;
+}
+
+/* Matrix Theme */
+body.matrix-theme {
+/* Primary Colors */
+--primary-neon: #00ff00;
+--secondary-neon: #00cc00;
+--warning-neon: #ffff00;
+--danger-neon: #ff4444;
+--purple-neon: #aa00ff;
+--blue-neon: #00aaff;
+--green-neon: #00ff00;
+--cyan-neon: #00ffff;
+--magenta-neon: #ff00ff;
+
+/* Background Colors */
+--bg-dark: #000f00;
+--bg-darker: #000a00;
+--bg-cosmic: #001a00;
+--bg-terminal: #000500;
+--bg-panel: #002000;
+--bg-card: #002a00;
+--bg-hover: #003500;
+
+/* Glass Effects */
+--glass-bg: rgba(0, 30, 0, 0.8);
+--glass-border: rgba(0, 255, 0, 0.4);
+--glass-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
+--blur-intensity: 8px;
+}
+
+/* Terminal Theme */
+body.terminal-theme {
+/* Primary Colors */
+--primary-neon: #00ff00;
+--secondary-neon: #00ff00;
+--warning-neon: #ffff00;
+--danger-neon: #ff0000;
+--purple-neon: #ff00ff;
+--blue-neon: #00ffff;
+--green-neon: #00ff00;
+--cyan-neon: #00ffff;
+--magenta-neon: #ff00ff;
+
+/* Background Colors */
+--bg-dark: #000000;
+--bg-darker: #000000;
+--bg-cosmic: #000000;
+--bg-terminal: #000000;
+--bg-panel: #001000;
+--bg-card: #002000;
+--bg-hover: #003000;
+
+/* Glass Effects */
+--glass-bg: rgba(0, 20, 0, 0.9);
+--glass-border: rgba(0, 255, 0, 0.5);
+--glass-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+--blur-intensity: 5px;
+}
+
+/* Theme Transitions */
+body {
+transition: background-color var(--transition-speed), color var(--transition-speed);
+}
+.glass-card, .navbar, .status-bar, .shell-btn, .command-card {
+transition: background-color var(--transition-speed), border-color var(--transition-speed), box-shadow var(--transition-speed);
+}
+.text-primary, .section-header h2, .brand-name {
+transition: color var(--transition-speed);
+}
+.risk-indicator, .stat-trend, .status-dot {
+transition: all var(--transition-speed);
+}
+
+/* Theme-specific Styles */
+body.light-theme {
+background: var(--bg-dark);
+color: var(--text-primary);
+}
+body.light-theme .glass-card {
+background: var(--glass-bg);
+border-color: rgba(0, 0, 0, 0.1);
+box-shadow: var(--shadow-md);
+}
+body.light-theme .quantum-terminal {
+background: var(--bg-terminal);
+color: var(--text-primary);
+border-color: rgba(0, 0, 0, 0.2);
+}
+body.light-theme .terminal-line {
+color: var(--text-primary);
+border-color: rgba(0, 0, 0, 0.1);
+}
+body.light-theme .command-code {
+background: rgba(0, 0, 0, 0.05);
+border-color: rgba(0, 0, 0, 0.2);
+color: var(--text-primary);
+}
+body.light-theme .risk-low {
+background: rgba(0, 136, 68, 0.1);
+color: var(--primary-neon);
+border-color: var(--primary-neon);
+}
+body.light-theme .risk-medium {
+background: rgba(255, 193, 7, 0.1);
+color: var(--warning-neon);
+border-color: var(--warning-neon);
+}
+body.light-theme .risk-high {
+background: rgba(220, 53, 69, 0.1);
+color: var(--danger-neon);
+border-color: var(--danger-neon);
+}
+body.light-theme .stat-value {
+background: var(--gradient-primary);
+-webkit-background-clip: text;
+background-clip: text;
+color: transparent;
+}
+body.light-theme .status-dot.connected {
+background: var(--success);
+box-shadow: 0 0 5px var(--success);
+}
+
+/* Cyberpunk Theme Specific */
+body.cyberpunk-theme .risk-high {
+animation: cyber-pulse 1.5s infinite;
+}
+@keyframes cyber-pulse {
+0% { box-shadow: 0 0 0 0 rgba(255, 0, 255, 0.7); }
+50% { box-shadow: 0 0 0 8px rgba(255, 0, 255, 0); }
+100% { box-shadow: 0 0 0 0 rgba(255, 0, 255, 0.7); }
+}
+
+/* Matrix Theme Specific */
+body.matrix-theme .terminal-line::before {
+content: attr(data-prefix);
+color: var(--primary-neon);
+margin-right: 10px;
+}
+body.matrix-theme .quantum-terminal {
+text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+}
+
+/* Terminal Theme Specific */
+body.terminal-theme .quantum-terminal {
+font-family: var(--font-mono);
+font-size: 1.1rem;
+line-height: 1.5;
+}
+body.terminal-theme .cursor-blink {
+animation: blink-terminal 1s infinite;
+}
+@keyframes blink-terminal {
+0%, 100% { opacity: 1; }
+50% { opacity: 0; }
+}
+
+/* Theme Toggle Button Styles */
+.theme-toggle-container {
+position: relative;
+display: inline-block;
+width: 60px;
+height: 30px;
+}
+.theme-toggle {
+position: absolute;
+cursor: pointer;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background: var(--bg-darker);
+border-radius: 15px;
+transition: var(--transition-all);
+}
+.theme-toggle:before {
+position: absolute;
+content: "";
+height: 22px;
+width: 22px;
+left: 4px;
+bottom: 4px;
+background-color: var(--primary-neon);
+border-radius: 50%;
+transition: var(--transition-all);
+}
+input.theme-checkbox {
+opacity: 0;
+width: 0;
+height: 0;
+}
+input.theme-checkbox:checked + .theme-toggle {
+background: var(--primary-neon);
+}
+input.theme-checkbox:checked + .theme-toggle:before {
+transform: translateX(30px);
+background-color: var(--bg-panel);
+}
+
+/* Theme Preview */
+.theme-preview {
+display: flex;
+gap: 15px;
+margin: 20px 0;
+flex-wrap: wrap;
+}
+.theme-option {
+width: 80px;
+height: 60px;
+border-radius: 10px;
+cursor: pointer;
+border: 2px solid transparent;
+transition: var(--transition-all);
+position: relative;
+overflow: hidden;
+}
+.theme-option:hover {
+transform: scale(1.05);
+border-color: var(--primary-neon);
+}
+.theme-option.active {
+border-color: var(--secondary-neon);
+box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+}
+.theme-option::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: linear-gradient(45deg, var(--theme-primary), var(--theme-secondary));
+opacity: 0.8;
+}
+.theme-option::after {
+content: attr(data-theme);
+position: absolute;
+bottom: 5px;
+left: 0;
+right: 0;
+text-align: center;
+color: white;
+font-size: 0.8rem;
+font-weight: bold;
+text-shadow: 0 0 3px black;
+}
+.theme-option[data-theme="dark"]::before {
+--theme-primary: #0a0a12;
+--theme-secondary: #1a0a2e;
+}
+.theme-option[data-theme="light"]::before {
+--theme-primary: #f8f9fa;
+--theme-secondary: #e9ecef;
+background: linear-gradient(45deg, #f8f9fa, #e9ecef);
+}
+.theme-option[data-theme="cyberpunk"]::before {
+--theme-primary: #000000;
+--theme-secondary: #1a001a;
+background: linear-gradient(45deg, #000000, #1a001a);
+}
+.theme-option[data-theme="matrix"]::before {
+--theme-primary: #000f00;
+--theme-secondary: #001a00;
+background: linear-gradient(45deg, #000f00, #001a00);
+}
+.theme-option[data-theme="terminal"]::before {
+--theme-primary: #000000;
+--theme-secondary: #002000;
+background: linear-gradient(45deg, #000000, #002000);
+}
+
+/* Animation for Theme Change */
+.theme-transition {
+animation: theme-fade 0.5s ease;
+}
+@keyframes theme-fade {
+from { opacity: 0.8; }
+to { opacity: 1; }
+}
+
+/* Theme-specific Typography */
+body.cyberpunk-theme, body.matrix-theme, body.terminal-theme {
+font-family: var(--font-mono);
+}
+body.cyberpunk-theme .brand-name, body.matrix-theme .brand-name {
+font-family: 'Courier New', monospace;
+letter-spacing: 1px;
+text-transform: uppercase;
+}
