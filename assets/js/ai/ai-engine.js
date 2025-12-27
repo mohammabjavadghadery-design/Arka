@@ -895,7 +895,7 @@ modal.innerHTML = `
 <div class="api-section">
 <h4><i class="fas fa-robot"></i> Google Gemini API</h4>
 <div class="api-input-group">
-<input type="password" class="api-input" id="gemini-api-key" placeholder="AIzaSyC9XkLw1B9Q8y6zZ5X5X5X5X5X5X5X5X5X" value="${this.apiKeys.gemini || ''}">
+<input type="password" class="api-input" id="gemini-api-key" placeholder="Enter your Gemini API key" value="${this.apiKeys.gemini || ''}">
 <button class="toggle-visibility" data-target="gemini-api-key">
 <i class="fas fa-eye"></i>
 </button>
