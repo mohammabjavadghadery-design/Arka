@@ -54,11 +54,16 @@ element.classList.remove('success');
 }, 1500);
 }
 
-// Play success sound
+// Play success sound using new audio manager
+if (window.arcAudio) {
+window.arcAudio.success();
+} else {
+// Fallback to old method if audio manager not available
 const successSound = document.getElementById('success-sound');
 if (successSound) {
 successSound.currentTime = 0;
 successSound.play().catch(e => console.log('Audio play prevented:', e));
+}
 }
 
 this.trackEvent('Clipboard', 'Copy', text.substring(0, 50));
